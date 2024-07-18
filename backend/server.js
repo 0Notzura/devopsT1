@@ -76,7 +76,7 @@ app.post('/login', async (req, res) => {
 // Rota para adicionar uma nova tarefa para um usuário
 app.post('/tasks', async (req, res) => {
     const { name, task } = req.body;
-
+    console.log(name,task)
     try {
         const db = await readDatabase();
 
@@ -95,6 +95,38 @@ app.post('/tasks', async (req, res) => {
         res.status(500).json({ error: 'Erro interno ao processar solicitação.' });
     }
 });
+
+// Rota para remover uma tarefa de um usuário
+app.delete('/tasks/:name/:taskText', async (req, res) => {
+
+    const { name, taskText } = req.params;
+    try {
+        const db = await readDatabase();
+
+        const userIndex = db.users.findIndex(user => user.name === name);
+        if (userIndex === -1) {
+            return res.status(404).json({ error: 'Usuário não encontrado.' });
+        }
+
+        const user = db.users[userIndex];
+        const taskIndex = user.tasks.findIndex(task => task === taskText);
+
+        if (taskIndex === -1) {
+            return res.status(404).json({ error: 'Tarefa não encontrada para este usuário.' });
+        }
+
+        // Remove a tarefa do array de tasks do usuário
+        user.tasks.splice(taskIndex, 1);
+
+        await saveDatabase(db);
+
+        res.status(200).json({ message: 'Tarefa removida com sucesso.' });
+    } catch (err) {
+        console.error('Erro ao remover tarefa:', err);
+        res.status(500).json({ error: 'Erro interno ao processar solicitação.' });
+    }
+});
+
 
 // Rota para listar todas as tarefas de um usuário
 app.get('/tasks/:name', async (req, res) => {
