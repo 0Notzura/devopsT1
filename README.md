@@ -3,6 +3,7 @@ Todo List App
 É um site de lista de tarefas com funcionalidades de registro de usuário, login, adição e visualização de tarefas.
 Ao fazer login, voce pode adicionar as tasks que voce quiser.
 A porta do frontend esta mapeada pra 80 e a do backend para a 3000
+
 Tecnologias Utilizadas
     
     Backend: Node.js, Express.js
