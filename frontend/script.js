@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = 'http://localhost:3000';
 
     const authOptions = document.getElementById('authOptions');
+    const authOptionsRegister=document.getElementById('showRegisterForm');
     const registerForm = document.getElementById('registerForm');
     const loginForm = document.getElementById('loginForm');
     const addTaskForm = document.getElementById('addTaskForm');
@@ -41,10 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Error registering user:', error);
-            alert('Error registering user. Please try again.');
         }
     });
-
+    authOptionsRegister.addEventListener('click',()=>{
+        addTaskForm.style.display = 'none';
+                tasksContainer.style.display = 'none';
+    })
     loginForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         
@@ -66,13 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if(data.error) {
                 alert(data.error);
-                authOptions.style.display = 'block';
                 addTaskForm.style.display = 'none';
                 tasksContainer.style.display = 'none';
                 
             }
             else{
-                authOptions.style.display = 'none';
                 addTaskForm.style.display = 'block';
                 tasksContainer.style.display = 'block';
                 await listTasks(loginData.name); 
@@ -100,14 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify(taskData)
             });
-            const data = await response.json();
-            if(data.error)
-                alert(data.error);
-            else
-                await listTasks(taskData.name); 
+            await listTasks(taskData.name); 
         } catch (error) {
             console.error('Error adding task:', error);
-            alert('Error adding task. Please try again.');
         }
     });
 
