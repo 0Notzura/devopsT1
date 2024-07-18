@@ -16,7 +16,7 @@ Tecnologias Utilizadas
     
 Como Usar
 
-  Clone este repositório: git clone https://github.com/gmpires/DevopsT1.git
+  Clone este repositório: git clone https://github.com/0Notzura/devopsT1.git
   
   Entre no diretório do projeto: cd DevopsT1-main
   
