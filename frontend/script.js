@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = 'http://localhost:3000';
+    const apiUrl = 'http://backeend_server:3000';
   
     const authOptions = document.getElementById('authOptions');
     const authOptionsRegister = document.getElementById('showRegisterForm');
