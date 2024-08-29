@@ -152,8 +152,9 @@ app.get('/tasks/:name', async (req, res) => {
 // Inicializa o servidor e o banco de dados
 initializeDatabase().then(() => {
     app.listen(port, () => {
-        console.log(`Servidor rodando em http://localhost:${port}`);
+        console.log('Servidor rodando');
     });
 }).catch(err => {
     console.error('Erro ao inicializar o servidor:', err);
 });
+
