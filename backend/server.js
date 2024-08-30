@@ -5,7 +5,13 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+    origin: '*', // Permite acesso de qualquer origem. Alterar para o domínio específico se necessário
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
 
 const dbFilePath = './db.json';
 
